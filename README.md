@@ -1,7 +1,16 @@
-# Project Title
+# Exodus, the core to the ***Patronus Charm*** discord bot project.
 
-A short description of the project.
+Exodus will be the core of a huge *Harry Potter* discord bot, it's most important feature would be **duels**!
 
-## Getting Started
+## Current features:
 
-Instructions on how to build and run the project.
+it works.
+
+### TODO List:
+-Data from pottermore, houses, wands, etc
+
+-Points level
+
+-House Cup
+
+-Load Spells from some api?
