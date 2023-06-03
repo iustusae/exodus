@@ -1,6 +1,9 @@
 add_rules("mode.debug", "mode.release")
 
 add_requires("dpp")
+add_requires("nlohmann-json")
+add_requires("libcurl")
+
 
 add_rules("mode.debug", "mode.release")
 
@@ -10,9 +13,17 @@ target("exodus")
     set_languages("c++17")
 
     add_files("src/*.cpp")
+    add_files("src/core/*.cpp")
+
+    add_headerfiles("src/core/*.hpp")
 
     add_packages("dpp")
+    add_packages("nlohmann-json")
+    add_packages("libcurl")
+
+
     add_includedirs("/usr/local/include")
+
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
