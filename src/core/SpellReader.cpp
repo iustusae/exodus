@@ -4,9 +4,9 @@
  * @brief Implementation of the SpellReader class defined in the header
  * @version 0.1
  * @date 2023-06-03
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 #include <cstddef>
 #include <curl/curl.h>
@@ -21,7 +21,7 @@
 /**
  * @brief Default constructor for SpellReader class.
  */
-SpellReader::SpellReader() {};
+SpellReader::SpellReader(){};
 
 /**
  * @brief Callback function to receive response data from libcurl.
@@ -42,14 +42,16 @@ static size_t wr_callback(void *contents, size_t size, size_t nmemb,
 // /**
 //  * @brief Fetches JSON spells from a remote API.
 //  *
-//  * 
+//  *
 //  */
 // dpp::embed SpellReader::all_spells_to_embed() {
 //   dpp::embed embed = dpp::embed()
-//     .set_author("Patronus Charm", "", "https://cdn.discordapp.com/avatars/1113625763355295754/c30f4daf9b6cc34f7aa0dabc23dfa15d.png")
+//     .set_author("Patronus Charm", "",
+//     "https://cdn.discordapp.com/avatars/1113625763355295754/c30f4daf9b6cc34f7aa0dabc23dfa15d.png")
 //     .set_title("All Harry Potter Spells")
 //     .set_url("https://api.potterdb.com/v1/spells")
-//     .set_description("(almost) all the spells mentioned in the Harry Potter Series, atcha wands!")
+//     .set_description("(almost) all the spells mentioned in the Harry Potter
+//     Series, atcha wands!")
 //     .set_thumbnail("https://cdn.discordapp.com/avatars/1113625763355295754/c30f4daf9b6cc34f7aa0dabc23dfa15d.png");
 
 //   if (!this->spells)
@@ -76,21 +78,25 @@ static size_t wr_callback(void *contents, size_t size, size_t nmemb,
 // }
 
 dpp::embed SpellReader::all_spells_to_embed() {
-  dpp::embed embed = dpp::embed()
-    .set_author("Patronus Charm", "", "https://cdn.discordapp.com/avatars/1113625763355295754/c30f4daf9b6cc34f7aa0dabc23dfa15d.png")
-    .set_title("All Harry Potter Spells")
-    .set_url("https://api.potterdb.com/v1/spells")
-    .set_description("(almost) all the spells mentioned in the Harry Potter Series, atcha wands!")
-    .set_thumbnail("https://cdn.discordapp.com/avatars/1113625763355295754/c30f4daf9b6cc34f7aa0dabc23dfa15d.png");
+  dpp::embed embed =
+      dpp::embed()
+          .set_author("Patronus Charm", "",
+                      "https://cdn.discordapp.com/avatars/1113625763355295754/"
+                      "c30f4daf9b6cc34f7aa0dabc23dfa15d.png")
+          .set_title("All Harry Potter Spells")
+          .set_url("https://api.potterdb.com/v1/spells")
+          .set_description("(almost) all the spells mentioned in the Harry "
+                           "Potter Series, atcha wands!")
+          .set_thumbnail(
+              "https://cdn.discordapp.com/avatars/1113625763355295754/"
+              "c30f4daf9b6cc34f7aa0dabc23dfa15d.png");
 
-  if (!this->spells)
-  {
+  if (!this->spells) {
     embed.add_field("An Error has occurred", "Failed to fetch the spells");
     return embed;
   }
 
-  for (const auto& spell : this->spells["data"])
-  {
+  for (const auto &spell : this->spells["data"]) {
     std::string name = spell["attributes"]["name"].get<std::string>();
     std::string description;
 
@@ -98,7 +104,8 @@ dpp::embed SpellReader::all_spells_to_embed() {
       if (spell["attributes"]["effect"].is_null()) {
         description = "No effect specified";
       } else if (spell["attributes"]["effect"].is_boolean()) {
-        description = spell["attributes"]["effect"].get<bool>() ? "True" : "False";
+        description =
+            spell["attributes"]["effect"].get<bool>() ? "True" : "False";
       } else {
         description = spell["attributes"]["effect"].get<std::string>();
       }
@@ -107,6 +114,6 @@ dpp::embed SpellReader::all_spells_to_embed() {
     }
 
     embed.add_field(name, description);
-  } 
-    return embed;
   }
+  return embed;
+}
