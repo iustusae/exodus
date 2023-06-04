@@ -15,7 +15,7 @@ class SpellReader {
     public:
         SpellReader();
         void get_json_spells();
-        dpp::embed all_spells_to_embed();
+        std::string all_spells_to_string();
         dpp::embed spec_spell_to_embed();
         
 };

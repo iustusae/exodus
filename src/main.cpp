@@ -30,26 +30,37 @@ int main() {
 
   bot.on_slashcommand([](const dpp::slashcommand_t &event) {
     if (event.command.get_command_name() == "ping") {
-      event.reply("Pong!");
-    }
-  });
+      auto start_time = std::chrono::steady_clock::now();
 
-  bot.on_message_create([&bot](const dpp::message_create_t &event) {
-    if (event.msg.content == "!spells") {
-      SpellReader sp = SpellReader();
-      /* create the embed */
-      dpp::embed embed = sp.all_spells_to_embed();
+      auto end_time = std::chrono::steady_clock::now();
+      auto ping_time = std::chrono::duration_cast<std::chrono::milliseconds>(
+                           end_time - start_time)
+                           .count();
 
-      /* reply with the created embed */
-      bot.message_create(dpp::message(event.msg.channel_id, embed)
-                             .set_reference(event.msg.id));
+      std::string response;
+      if (ping_time < 50) {
+        response = "**Ping time**: " + std::to_string(ping_time) + "ms\n";
+        response += "That's faster than a Golden Snitch! :zap:";
+      } else if (ping_time < 100) {
+        response = "**Ping time**: " + std::to_string(ping_time) + "ms\n";
+        response += "As fast as a lightning-quick owl! :owl: ⚡";
+      } else if (ping_time < 200) {
+        response = "**Ping time**: " + std::to_string(ping_time) + "ms\n";
+        response += "oof... You got yourself an *Errol* internet...";
+      } else {
+        response = "**Ping time**: " + std::to_string(ping_time) + "ms\n";
+        response += "Slower than the troll in the dungeons... :snail:";
+      }
+
+      event.reply(dpp::message(response).set_flags(dpp::m_ephemeral));
     }
   });
 
   bot.on_ready([&bot](const dpp::ready_t &event) {
     if (dpp::run_once<struct register_bot_commands>()) {
       bot.global_command_create(
-          dpp::slashcommand("ping", "ping pong", bot.me.id));
+          dpp::slashcommand("ping", "owl speed meter", bot.me.id));
+          
     }
   });
 
