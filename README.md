@@ -4,9 +4,10 @@ Exodus will be the core of a huge *Harry Potter* discord bot, it's most importan
 
 ## Current features:
 
-it works.
+it says pong when i do `/ping`
 
 ### TODO List:
+
 **_House Sorting_**: Allow users to be sorted into different Hogwarts houses (Gryffindor, Slytherin, Ravenclaw, Hufflepuff) using a sorting hat mechanism.
 
 **_House Points System_**: Implement a system to award and track points for different houses based on user activities or achievements. You can include commands to add or deduct points and display the current house standings.
